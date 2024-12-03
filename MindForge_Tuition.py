@@ -23,7 +23,7 @@ with st.sidebar:
 
 img, titl = st.columns([1,2]) 
 with img:
-  st.image("D:\Streamlit\env\Tution.png", width=150)
+  st.image("Tution.png", width=150)
 with titl:
   st.title("MindForge Tuition")
 st.write("---")
