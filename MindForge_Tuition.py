@@ -32,7 +32,7 @@ with titl:
 st.write("---")
 
 
-
+#student info section
 if choice == "Student Info":
   st.markdown("<h3 style= 'text-align: center;'> Student Information </h3>", unsafe_allow_html=True)
     #Create Session state
@@ -59,7 +59,6 @@ if choice == "Student Info":
 
       col1, col2, col3, col4 = st.columns(4)
       s_btn = col1.form_submit_button("Submit")
-      #remove = col2.form_submit_button("Remove")
 
       if s_btn:
         if not all([f_name, l_name, cls, cno]):
@@ -70,8 +69,7 @@ if choice == "Student Info":
                     "Class": cls,
                     "Contact NO" : cno }]
           st.session_state.student_info = pd.concat([st.session_state.student_info, pd.DataFrame(new_entry)], ignore_index=True)
-          st.session_state.student_info.to_csv("Student_Information.csv", index = False)
-          #st.dataframe(st.session_state.student_info)      
+          st.session_state.student_info.to_csv("Student_Information.csv", index = False)     
           st.success("Submitted Successfully")
           st.write(st.session_state.student_info)
 
@@ -96,7 +94,7 @@ if choice == "Student Info":
           st.warning("No data Available to remove.") 
        st.write(st.session_state.student_info)     
 
-         
+#Fees section        
 elif choice == "Fees":
   st.markdown("<h3 style= 'text-align: center;'> Students Fees</h3>",unsafe_allow_html=True)
   if "student_fees" not in st.session_state or "student_fees" in st.session_state:
@@ -129,28 +127,54 @@ elif choice == "Fees":
             st.success("Paid Successfully") 
             st.write(st.session_state.student_fees)
 
+    #Removing wrongly inserted data in fees section
     elif rad1 == "Remove":
        col1, col2 = st.columns(2)
        fn_ = st.text_input("First Name")
        ln_ = st.text_input("Last Name") 
-       rb_  = st.button("Remove")       
-       
+       rb_  = st.button("Remove") 
 
-
-
+       if  rb_:   
+          if not all([fn_, ln_]):
+             st.warning("Fill the wrong data into all the fields given above")
+          else:
+             if not st.session_state.student_fees.empty:
+                st.session_state.student_fees = st.session_state.student_fees.drop(
+                   st.session_state.student_fees[
+                      (st.session_state.student_fees["First Name"] ==  fn_) &
+                      (st.session_state.student_fees["Last Name"] == ln_)].index)
+                st.session_state.student_fees.to_csv("Student_Fees.csv", index=False)
+                st.success(f"{fn_} {ln_} is removed successfully")
+                
+#Attendence section
 elif choice == "Attendence":
     st.markdown("<h3 style= 'text-align: center;'> Student Attendence </h3>", unsafe_allow_html=True)
-    with st.form("Student Attendence", clear_on_submit=True):
-           fl_name = st.text_input("Full Name")
-           col1,col2, col3 = st.columns(3)
-           atnce = col1.text_input("Attendence as Yes/No")
-           sbtn = st.form_submit_button("Submit")
+    if "student_attendence" not in st.session_state or "student_attendence" in st.session_state:
+        try:
+          st.session_state.student_attendence = pd.read_csv("Student Attendence.csv")
+        except:
+          st.session_state.student_attendence = pd.DataFrame(columns = ["Full Name" , "Attendence", "Date", "Time", "Leave Reason"])
+        with st.form("Student Attendence", clear_on_submit=True):
+              fl_name = st.text_input("Full Name")
+              col1,col2, col3 = st.columns(3)
+              atnce = col1.text_input("Attendence as Yes/No")
 
-           if sbtn:
-              if not all([fl_name, sbtn]):
-                  st.warning("Please fill all the above fields")
-              else:
-                  st.success("Submitted Successfully")  
+              col1, col2 = st.columns(2)
+              dat = col1.date_input("Date")
+              tme = col2.time_input("Time")
+
+              reason = st.text_input("Leave Reason")
+
+              sbtn = st.form_submit_button("Submit")
+
+              if sbtn:
+                  if not all([fl_name, atnce, dat, tme ]):
+                      st.warning("Please fill all the above fields")
+                  else:
+                      new_atendce = [{"Full Name": fl_name, "Attendence": atnce, "Date": dat, "Time": tme, "Leave Reason": reason}]
+                      st.session_state.student_attendence = pd.concat([ st.session_state.student_attendence, pd.DataFrame(new_atendce)], ignore_index = True)
+                      st.session_state.student_attendence.to_csv("Student Attendence.csv", index=False)
+                      st.success(f"{fl_name} is attende today")  
 
 else:
    st.markdown("<h3 style= 'text-align: center;'> Report </h3>", unsafe_allow_html=True)
@@ -161,3 +185,8 @@ else:
 
    #Student Fees
    st.markdown("<h5> Student Fees </h5>", unsafe_allow_html=True)
+   st.write(st.session_state.student_fees) 
+
+   #Student Attendence
+   st.markdown("<h5> Student Attendence </h5>", unsafe_allow_html=True)
+   st.write(st.session_state.student_attendence)
