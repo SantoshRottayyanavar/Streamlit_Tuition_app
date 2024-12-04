@@ -4,16 +4,16 @@ import pandas as pd
 import os
 
 st.set_page_config(page_title="MindForge_Tuition", layout="wide", page_icon="👨🏻‍💼")
-st.markdown("""<style>
-.st-emotion-cache-1wbqy5l.e17vllj40
-{
-            visibility : Hidden;
-}            
-.st-emotion-cache-125megu.ef3psqc5 
-{
-            visibility : Hidden;
-}                       
-</style>""", unsafe_allow_html=True)
+# st.markdown("""<style>
+# .st-emotion-cache-1wbqy5l.e17vllj40
+# {
+#             visibility : Hidden;
+# }            
+# .st-emotion-cache-125megu.ef3psqc5 
+# {
+#             visibility : Hidden;
+# }                       
+# </style>""", unsafe_allow_html=True)
 
 with st.sidebar:
  choice = option_menu(
