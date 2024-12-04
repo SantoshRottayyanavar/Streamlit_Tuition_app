@@ -179,14 +179,14 @@ elif choice == "Attendence":
 else:
    st.markdown("<h3 style= 'text-align: center;'> Report </h3>", unsafe_allow_html=True)
 
-   #Student Information
+   
    st.markdown("<h5> Student Information </h5>",unsafe_allow_html=True)
    st.write(st.session_state.student_info) 
 
-   #Student Fees
+   
    st.markdown("<h5> Student Fees </h5>", unsafe_allow_html=True)
    st.write(st.session_state.student_fees) 
 
-   #Student Attendence
+ 
    st.markdown("<h5> Student Attendence </h5>", unsafe_allow_html=True)
    st.write(st.session_state.student_attendence)
