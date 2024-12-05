@@ -1,7 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import pandas as pd
-import os
 
 st.set_page_config(page_title="MindForge_Tuition", layout="wide", page_icon="👨🏻‍💼")
 # st.markdown("""<style>
@@ -45,7 +44,7 @@ if choice == "Student Info":
                         "Class",
                         "Contact NO"])
     
-  #add, remove
+  #students add
   rad= st.radio("Choose any one for Add or Remove", options=("ADD", "Remove"))
   if rad == "ADD":
     with st.form("Student Information",clear_on_submit=True):
@@ -102,7 +101,7 @@ elif choice == "Fees":
        st.session_state.student_fees = pd.read_csv("Student_Fees.csv")
     except:
        st.session_state.student_fees = pd.DataFrame(columns = ["First Name", "Last Name", "Fees", "Date", "Time"])
-    
+    #Stdents fees add
     rad1 = st.radio("Select any one to add or remove fees information(remove only if any wrong information)", options=("ADD","Remove"))
     if rad1 == "ADD":
       with st.form("Students Fees", clear_on_submit=True):
@@ -154,7 +153,7 @@ elif choice == "Attendence":
           st.session_state.student_attendence = pd.read_csv("Student Attendence.csv")
         except:
           st.session_state.student_attendence = pd.DataFrame(columns = ["First Name" , "Last Name", "Attendence", "Date", "Time", "Leave Reason"])
-        
+        #students attendemce add
         rad2 = st.radio("Select any one button to add and remove (remove only when you typed wrong)", options = ("ADD", "Remove"))
         if rad2 == "ADD":
           with st.form("Student Attendence", clear_on_submit=True):
@@ -181,7 +180,8 @@ elif choice == "Attendence":
                         st.session_state.student_attendence = pd.concat([ st.session_state.student_attendence, pd.DataFrame(new_atendce)], ignore_index = True)
                         st.session_state.student_attendence.to_csv("Student Attendence.csv", index=False)
                         st.success(f"{fst_name} {lst_name} is attende today")  
-
+                     
+        #student attendece remove if wrogly inserted
         elif rad2 == "Remove":
            col1, col2 = st.columns(2)
            ft_name = col1.text_input("Firs Name")
@@ -198,7 +198,7 @@ elif choice == "Attendence":
                 st.session_state.student_attendence.to_csv("Student Attendence.csv", index = False)
                 st.success(f"{ft_name} {lt_name} has been removed")
 
-
+#Report Section
 else:
    st.markdown("<h3 style= 'text-align: center;'> Report </h3>", unsafe_allow_html=True)
 
