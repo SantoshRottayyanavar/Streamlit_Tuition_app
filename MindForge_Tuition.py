@@ -7,7 +7,7 @@ st.set_page_config(page_title="MindForge_Tuition", layout="wide", page_icon="ðŸ‘
 page_bg_image = """
 <style>
 [data-testid="stMain"] {
-background-image: url("https://img.freepik.com/free-vector/blank-banner-design-with-happy-kids_1308-33116.jpg?t=st=1733394580~exp=1733398180~hmac=e9512978d2f03ad7915f4e1f68f21b95d1ff2b871067b4709eaa8253011982fc&w=1060");
+background-image: url("https://img.freepik.com/free-photo/black-background-with-leaves-vegetation-texture_23-2149872513.jpg?t=st=1733395221~exp=1733398821~hmac=8252e2041bb510ccfc16ca40a293c1b3d610f4fa3a5e83eafda1fab8c4f4202f&w=1060");
 background-size: cover;
 }
 </style>"""
