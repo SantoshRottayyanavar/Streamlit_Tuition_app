@@ -10,6 +10,13 @@ page_bg_image = """
 background-image: url("https://img.freepik.com/free-photo/black-background-with-leaves-vegetation-texture_23-2149872513.jpg?t=st=1733395221~exp=1733398821~hmac=8252e2041bb510ccfc16ca40a293c1b3d610f4fa3a5e83eafda1fab8c4f4202f&w=1060");
 background-size: cover;
 }
+[data-testid="stHeader"] {
+background-color: rgba(0, 0, 0, 0);
+}
+[data-testid="stSidebar"] {
+background-image: url("https://img.freepik.com/free-vector/elegant-watercolor-background-with-golden-foil-leaves-greeting-invitation-card-design_25819-714.jpg?t=st=1733395921~exp=1733399521~hmac=3c4834eea5da3ff157367c4aa467474243ae14548c88071384aa9fb0d13f09d7&w=740");
+background-size: cover;
+}
 </style>"""
 st.markdown(page_bg_image, unsafe_allow_html=True)
 
