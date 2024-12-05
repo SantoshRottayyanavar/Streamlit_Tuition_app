@@ -114,7 +114,7 @@ if choice == "Student Info":
     #Showing Final Report of Student Information
     if "student_info" not in st.session_state or "student_info" in st.session_state:
       st.session_state.student_info = pd.read_csv("Student_Information.csv")
-  st.write(st.session_state.student_info)     
+  st.table(st.session_state.student_info)     
 
 #Fees section        
 elif choice == "Fees":
@@ -171,7 +171,7 @@ elif choice == "Fees":
     #Showing Student Fees Report
     if "student_fees" not in st.session_state or "student_fees" in st.session_state:
        st.session_state.student_fees = pd.read_csv("Student_Fees.csv")
-  st.write(st.session_state.student_fees)
+  st.table(st.session_state.student_fees)
              
 #Attendence section
 elif choice == "Attendence":
@@ -228,7 +228,7 @@ elif choice == "Attendence":
         #Showing Student Attendence Report
         if "student_attendence" not in st.session_state or "student_attendence" in st.session_state:
                 st.session_state.student_attendence = pd.read_csv("Student Attendence.csv")
-    st.write(st.session_state.student_attendence)
+    st.table(st.session_state.student_attendence)
 
 #Report Section
 else:
@@ -237,14 +237,14 @@ else:
    st.markdown("<h5> Student Information </h5>", unsafe_allow_html=True)
    if "student_info" not in st.session_state or "student_info" in st.session_state:
           st.session_state.student_info = pd.read_csv("Student_Information.csv")
-   st.write(st.session_state.student_info) 
+   st.table(st.session_state.student_info) 
 
    st.markdown("<h5> Student Fees </h5>", unsafe_allow_html=True)
    if "student_fees" not in st.session_state or "student_fees" in st.session_state:
        st.session_state.student_fees = pd.read_csv("Student_Fees.csv")
-   st.write(st.session_state.student_fees)
+   st.table(st.session_state.student_fees)
 
    st.markdown("<h5> Student Attendence </h5>", unsafe_allow_html=True)
    if "student_attendence" not in st.session_state or "student_attendence" in st.session_state:
           st.session_state.student_attendence = pd.read_csv("Student Attendence.csv")
-   st.write(st.session_state.student_attendence)
+   st.table(st.session_state.student_attendence)
