@@ -2,8 +2,18 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import pandas as pd
 
-
 st.set_page_config(page_title="MindForge_Tuition", layout="wide", page_icon="👨🏻‍💼")
+
+page_bg_image = """
+<style>
+[data-testid="stMain"] {
+background-image: url("https://img.freepik.com/free-vector/blank-banner-design-with-happy-kids_1308-33116.jpg?t=st=1733394580~exp=1733398180~hmac=e9512978d2f03ad7915f4e1f68f21b95d1ff2b871067b4709eaa8253011982fc&w=1060");
+background-size: cover;
+}
+</style>"""
+st.markdown(page_bg_image, unsafe_allow_html=True)
+
+
 # st.markdown("""<style>
 # .st-emotion-cache-1wbqy5l.e17vllj40
 # {
