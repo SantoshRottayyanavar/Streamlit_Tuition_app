@@ -88,7 +88,7 @@ if choice == "Student Info":
           st.session_state.student_info = pd.concat([st.session_state.student_info, pd.DataFrame(new_entry)], ignore_index=True)
           st.session_state.student_info.to_csv("Student_Information.csv", index = False)     
           st.success("Submitted Successfully")
-          st.write(st.session_state.student_info)
+          # st.write(st.session_state.student_info)
 
  #Students Remove
   elif rad == "Remove":
@@ -109,8 +109,7 @@ if choice == "Student Info":
           st.session_state.student_info.to_csv("Student_Information.csv", index = False)
           st.success(f"Record for {f_n} {l_n} has been removed.")
        else:
-          st.warning("No data Available to remove.") 
-       st.write(st.session_state.student_info) 
+          st.warning("No data Available to remove.")  
 
     #Showing Final Report of Student Information
     if "student_info" not in st.session_state or "student_info" in st.session_state:
