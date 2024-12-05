@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import pandas as pd
 
+
 st.set_page_config(page_title="MindForge_Tuition", layout="wide", page_icon="👨🏻‍💼")
 # st.markdown("""<style>
 # .st-emotion-cache-1wbqy5l.e17vllj40
@@ -44,7 +45,7 @@ if choice == "Student Info":
                         "Class",
                         "Contact NO"])
     
-  #students add
+  #add, remove
   rad= st.radio("Choose any one for Add or Remove", options=("ADD", "Remove"))
   if rad == "ADD":
     with st.form("Student Information",clear_on_submit=True):
@@ -78,6 +79,7 @@ if choice == "Student Info":
     f_n = col1.text_input("First Name")
     l_n = col2.text_input("Last Name")
     s_r = st.button("Remove")
+
     if s_r:
      if not all([f_n, l_n]):
        st.warning("Please enter First Name and Last Name fields properly to remove a perticular person")
@@ -91,7 +93,12 @@ if choice == "Student Info":
           st.success(f"Record for {f_n} {l_n} has been removed.")
        else:
           st.warning("No data Available to remove.") 
-       st.write(st.session_state.student_info)     
+       st.write(st.session_state.student_info) 
+
+    #Showing Final Report of Student Information
+    if "student_info" not in st.session_state or "student_info" in st.session_state:
+      st.session_state.student_info = pd.read_csv("Student_Information.csv")
+  st.write(st.session_state.student_info)     
 
 #Fees section        
 elif choice == "Fees":
@@ -101,7 +108,7 @@ elif choice == "Fees":
        st.session_state.student_fees = pd.read_csv("Student_Fees.csv")
     except:
        st.session_state.student_fees = pd.DataFrame(columns = ["First Name", "Last Name", "Fees", "Date", "Time"])
-    #Stdents fees add
+    
     rad1 = st.radio("Select any one to add or remove fees information(remove only if any wrong information)", options=("ADD","Remove"))
     if rad1 == "ADD":
       with st.form("Students Fees", clear_on_submit=True):
@@ -144,7 +151,12 @@ elif choice == "Fees":
                       (st.session_state.student_fees["Last Name"] == ln_)].index)
                 st.session_state.student_fees.to_csv("Student_Fees.csv", index=False)
                 st.success(f"{fn_} {ln_} has been removed successfully")
-                
+    
+    #Showing Student Fees Report
+    if "student_fees" not in st.session_state or "student_fees" in st.session_state:
+       st.session_state.student_fees = pd.read_csv("Student_Fees.csv")
+  st.write(st.session_state.student_fees)
+             
 #Attendence section
 elif choice == "Attendence":
     st.markdown("<h3 style= 'text-align: center;'> Student Attendence </h3>", unsafe_allow_html=True)
@@ -153,7 +165,7 @@ elif choice == "Attendence":
           st.session_state.student_attendence = pd.read_csv("Student Attendence.csv")
         except:
           st.session_state.student_attendence = pd.DataFrame(columns = ["First Name" , "Last Name", "Attendence", "Date", "Time", "Leave Reason"])
-        #students attendemce add
+        
         rad2 = st.radio("Select any one button to add and remove (remove only when you typed wrong)", options = ("ADD", "Remove"))
         if rad2 == "ADD":
           with st.form("Student Attendence", clear_on_submit=True):
@@ -176,17 +188,17 @@ elif choice == "Attendence":
                     if not all([fst_name, lst_name, atnce, dat, tme ]):
                         st.warning("Please fill all the above fields")
                     else:
-                        new_atendce = [{"Fist Name": fst_name, "Last Name": lst_name, "Attendence": atnce, "Date": dat, "Time": tme, "Leave Reason": reason}]
+                        new_atendce = [{"First Name": fst_name, "Last Name": lst_name, "Attendence": atnce, "Date": dat, "Time": tme, "Leave Reason": reason}]
                         st.session_state.student_attendence = pd.concat([ st.session_state.student_attendence, pd.DataFrame(new_atendce)], ignore_index = True)
                         st.session_state.student_attendence.to_csv("Student Attendence.csv", index=False)
                         st.success(f"{fst_name} {lst_name} is attende today")  
-                     
-        #student attendece remove if wrogly inserted
+
         elif rad2 == "Remove":
            col1, col2 = st.columns(2)
            ft_name = col1.text_input("Firs Name")
            lt_name = col2.text_input("Last Name")
            rba = st.button("Remove")
+
            if rba:
               if not all([ft_name, lt_name]):
                  st.warning("Please fill all the above feilds")
@@ -197,6 +209,10 @@ elif choice == "Attendence":
                       (st.session_state.student_attendence["Last Name"] == lt_name)].index)
                 st.session_state.student_attendence.to_csv("Student Attendence.csv", index = False)
                 st.success(f"{ft_name} {lt_name} has been removed")
+        #Showing Student Attendence Report
+        if "student_attendence" not in st.session_state or "student_attendence" in st.session_state:
+                st.session_state.student_attendence = pd.read_csv("Student Attendence.csv")
+    st.write(st.session_state.student_attendence)
 
 #Report Section
 else:
