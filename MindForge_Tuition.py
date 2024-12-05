@@ -132,7 +132,7 @@ elif choice == "Fees":
         col1, col2 = st.columns(2)
         fname = col1.text_input("First Name")
         lname = col2.text_input("Last Name")
-        fe = st.number_input("Enter Fees")
+        fe = round(st.number_input("Enter Fees"))
 
         col3, col4 = st.columns(2)
         dat = col3.date_input("Enter Date")
